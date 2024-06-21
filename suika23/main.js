@@ -1,3 +1,4 @@
+import { Body } from "matter-js";
 import { FRUITS } from "./fruits.js";
 
 var Engine = Matter.Engine,
@@ -82,3 +83,15 @@ function addFruit() {
 }
 
 addFruit();
+
+// window.onkeydown = (event) => {
+
+// 	switch(event.code) {
+// 	case "keyA":
+//     Body.setPosition(currentBody, {
+//         x : currentBody.Position.x ??
+//     })
+//     case "keyD":
+//         case "keyS":
+//   }
+// }
