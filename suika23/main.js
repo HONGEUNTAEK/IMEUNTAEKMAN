@@ -149,7 +149,7 @@ Events.on(engine, "collisionStart", (event) => {
             )
 
             // 생성한 과일 월드에 추가
-            World.add(world. newBody)
+            World.add(world, newBody)
         }
     })
 })
