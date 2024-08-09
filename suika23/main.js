@@ -131,6 +131,10 @@ Events.on(engine, "collisionStart", (event) => {
             // 기존 과일의 index를 저장
             const index = collision.bodyA.index;
 
+            // 수박일 경우 처리하지 않음
+            if ( index === FRUITS.length - 1)
+                return;
+
             // 같은 과일 제거
             World.remove(world, [collision.bodyA, collision.bodyB]);
 
