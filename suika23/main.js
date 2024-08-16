@@ -45,6 +45,8 @@ const ground = Bodies.rectangle(310, 820, 620, 60, {
 });
 
 const topLine = Bodies.rectangle(310, 150, 620, 2, {
+    // 게임 종료 이벤트 처리를 위해 이름을 지정
+    name : "topLine",
     isStatic : true,
     isSensor : true,    // 충돌은 감지하는데, 물리엔진은 적용 안함
     render: { fillStyle: '#E6B143'}
@@ -60,6 +62,9 @@ Runner.run(engine);
 let currentBody = null;
 let currentFruit = null;
 let disableAction = false;
+
+// 키 제어 변수 생성
+let interval = null;
 
 function addFruit() {
 
@@ -94,6 +99,17 @@ window.onkeydown = (event) => {
 
     switch(event.code) {
         case "KeyA":
+            if (interval)
+                return;
+            // 인터벌 변수를 사용, 밀리초 단위로 함수를 반복
+            interval = setInterval(() => {
+                    if(currentBody.position.x - currentFruit.radius > 30)
+                    Body.setPosition(currentBody, {
+                        x: currentBody.position.x - 1,
+                        y: currentBody.position.y,
+                });
+            }, 5)    
+
             if(currentBody.position.x - currentFruit.radius > 30)
                 Body.setPosition(currentBody, {
                     x: currentBody.position.x - 10,
@@ -101,6 +117,17 @@ window.onkeydown = (event) => {
             });
             break;
         case "KeyD":
+            if (interval)
+                return;
+            // 인터벌 변수를 사용, 밀리초 단위로 함수를 반복
+            interval = setInterval(() => {
+                if(currentBody.position.x - currentFruit.radius < 590)
+                Body.setPosition(currentBody, {
+                    x: currentBody.position.x + 1,
+                    y: currentBody.position.y,
+                });
+            }, 5)  
+
             if(currentBody.position.x + currentFruit.radius < 590)
                 Body.setPosition(currentBody, {
                     x: currentBody.position.x + 10,
@@ -118,6 +145,15 @@ window.onkeydown = (event) => {
             },1000)
             break;
 
+    }
+}
+
+window.onkeyup = (event) => {
+    switch (event.code) {
+        case "KeyA":
+        case "KeyD":
+            clearInterval(interval);
+            interval = null;
     }
 }
 
@@ -154,6 +190,11 @@ Events.on(engine, "collisionStart", (event) => {
 
             // 생성한 과일 월드에 추가
             World.add(world, newBody)
+        }
+
+        if ( !disableAction && (collision.bodyA.name === "topLine" || collision.bodyB.name === "topLine")) {
+            alert("gmae over");
+            disableAction = true;
         }
     })
 })
