@@ -23,7 +23,7 @@ class Sprite {
     // 캐릭터 그려줌
     draw(){
         c.fillStyle = "red";
-        c.fillRect(this.position.x, this.position.y, this.width, this.height, 50, 150);
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
         
     }
 
