@@ -1,3 +1,49 @@
-<canvas></canvas>
+<!-- padding을 수정하기 위해 style css 추가 -->
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
 
-<script src="index.js"></script>
+<body>
+    <!-- 캔바스 안에 체력을 넣기 위해 스타일 추가 relative-->
+    <!-- 캔바스 안에 가두기 위해 display: inline-block 추가 -->
+    <div style="position: relative; display: inline-block;">
+        <!-- 가로로 출력을 하기 위해 flex 추가 -->
+        <!-- 체력바를 늘리기 위해 가로 100%추가 -->
+        <!-- 수평 정렬을 위해 align-items 추가 -->
+        <!-- 벽하고 거리를 두기 위해 padding 추가 -->
+        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px;">
+            <!-- 1p 체력 -->
+            <!-- 체력감소를 반대로 하기 위해 스타일 추가 display: flex; justify-content: flex-end; -->
+            <div style="position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;">
+                <div style="background-color: yellow; height: 30px; width: 100%;"></div>
+                <!-- display: flex; justify-content: flex-end;를 적용하기 위해 width : 100% 수정 -->
+                <div id="playerHealth" style="position: absolute; background-color: blue; top: 0; right: 0; bottom : 0; width: 100%;"></div>
+            </div>
+
+            <!-- 타이머 -->
+            <!-- 100px을 맞추기 위해 flex-shinkg 추가 -->
+            <div style="background-color: red; height: 100px; width: 100px; flex-shrink: 0;"></div>
+            
+            <!-- 2p 체력 -->
+            <!-- 체력 감소를 위해 아이디 지정 -> js로 구현 -->
+            <!-- 이중 체력을 표현하기 위해 묶음 -->
+            <div style="position: relative; height: 30px; width: 100%;">
+                <div style="background-color: yellow; height: 30px; width: 100%;"></div>
+                <div id="enemyHealth" style="position: absolute; background-color: blue; top: 0; right: 0; left: 0; bottom : 0;"></div>
+            </div>
+            
+
+        </div>
+
+        <canvas></canvas>
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+
+
+
